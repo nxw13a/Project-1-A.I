@@ -1,3 +1,4 @@
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,20 +20,21 @@ public static int maximum(int x)
 // (rightchild - 2) / 2 = parent
 // (leftchild - 1) / 2 = parent
 
-public static void main(String[] args) {
+public static void Build_Tree() {
 
-        int num_item = 2;
+        //temporary data
+        int num_item = 11;
         int limit = 5;
-        String[] name = {"a","b"};
+        String[] name = {"a","b","c","d","e","f","g","h","i","j","k"};
         int[] cost = {2,3};
         int[] value = {4,5};
 
 
 		System.out.println("Work on this Nattapat");
-        Node a = new Node("","",-1);
+        List<String> c = new ArrayList<String>();
+        Node a = new Node("","",-1,c);
 		List<Node> b = new ArrayList<Node>();
         b.add(a);
-        System.out.println(b.get(0).item);
 
         int y = 1;
 
@@ -45,14 +47,77 @@ public static void main(String[] args) {
                     hold = "T";
                 else
                     hold = "F";
-
-                Node temp = new Node(name[x],hold,x);
+                List<String> temp2 = new ArrayList<String>();
+                Node temp = new Node(name[x],hold,x,temp2);
                 b.add(temp);
                 y++;
             }
         }
-        for(int x = 1; x < b.size();x++)
-            System.out.println(b.get(x).item+b.get(x).choice+b.get(x).depth);
+
+        for(int x = 1;x < b.size();x++)
+        {
+            int t = x;
+            while((((2*t)+1) < b.size()) && (((2*t)+2) < b.size()) )
+            {
+                if(b.get(t).path.size() == 0 && b.get(t).depth == 0)
+                {
+                    if((b.get(t).choice == "T") && (b.get(t).path.contains(b.get(t).item) == false))
+                        b.get(t).path.add(b.get(t).item);
+                }
+                if((b.get(t).choice == "T") && (b.get((2*t)+2).choice == "T"))
+                {
+                    for(int p = 0; p < b.get(t).path.size();p++)
+                    {
+                        if(b.get((2*t)+2).path.contains(b.get(t).path.get(p)) == false)
+                            b.get((2*t)+2).path.add(b.get(t).path.get(p));
+                    }
+                    if(b.get((2*t)+2).path.contains(b.get((2*t)+2).item) == false)
+                        b.get((2*t)+2).path.add(b.get((2*t)+2).item);
+                }
+                if((b.get(t).choice == "T") && (b.get((2*t)+1).choice == "F"))
+                {
+                    for(int p = 0; p < b.get(t).path.size();p++)
+                    {
+                        if(b.get((2*t)+1).path.contains(b.get(t).path.get(p)) == false)
+                            b.get((2*t)+1).path.add(b.get(t).path.get(p));
+                    }
+                }
+
+                if((b.get(t).choice == "F") && (b.get((2*t)+2).choice == "T"))
+                {
+                    for(int p = 0; p < b.get(t).path.size();p++)
+                    {
+                        if(b.get((2*t)+2).path.contains(b.get(t).path.get(p)) == false)
+                            b.get((2*t)+2).path.add(b.get(t).path.get(p));
+                    }
+                    if(b.get((2*t)+2).path.contains(b.get((2*t)+2).item) == false)
+                        b.get((2*t)+2).path.add(b.get((2*t)+2).item);
+                }
+                if((b.get(t).choice == "F") && (b.get((2*t)+1).choice == "F"))
+                {
+                    for(int p = 0; p < b.get(t).path.size();p++)
+                    {
+                         if(b.get((2*t)+1).path.contains(b.get(t).path.get(p)) == false)
+                            b.get((2*t)+1).path.add(b.get(t).path.get(p));
+                    }
+                }
+                t = (2*t) + 1;
+            }
+
+       
+        }
+        /*
+        System.out.println(b.size());
+        System.out.println();
+            for(int q = 1; q < b.size();q++)
+            {
+                System.out.println(b.get(q).item+b.get(q).choice+b.get(q).depth+b.get(q).path);
+            }
+        */
+}
+public static void main(String[] args)
+{
+    Build_Tree();
 }
 }
 
@@ -61,12 +126,15 @@ class Node {
 	String item;
 	String choice;
 	int depth;
+    List<String> path;
 
-	Node(String item, String choice, int depth) {
+
+	Node(String item, String choice, int depth, List<String> path) {
 
 		this.item = item;
 		this.choice = choice;
 		this.depth = depth;
+        this.path = path;
 
 	}
 }
