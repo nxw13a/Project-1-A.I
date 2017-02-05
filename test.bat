@@ -1,4 +1,4 @@
 @echo off
 
-javac Knapsack.java
-java Knapsack
+javac -cp "jars/*;.;resources/*" implementation/Knapsack.java implementation/BinaryTree.java
+java -cp ".;jars/*" implementation.BinaryTree
