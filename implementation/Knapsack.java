@@ -4,7 +4,7 @@ Proffessor: Dr. Pettit
 Languages: Java
 Artificial Intelligent
 
-
+note: this will work from 22 items or less. Since my laptop don't have alot of memory.
 */
 package implementation;
 import java.io.BufferedReader;
@@ -19,6 +19,7 @@ public class Knapsack {
 
 	private static int capacity_limit;
 	private static int number_of_item;
+
 	private static List<String> name;
 	private static List<Integer> cost;
 	private static List<Integer> value;
@@ -27,9 +28,62 @@ public class Knapsack {
 	private static List<Double> full_cost;
 	private static List<Double> full_value;
 
+	private static String lowerBound;
+	private static String upperBound;
+	private static double lower_cost;
+	private static double upper_cost;
+	private static double lower_value;
+	private static double upper_value;
+
+	public static List<String> return_name()
+	{
+		return name;
+	}
+	public static List<Integer> return_cost()
+	{
+		return cost;
+	}
+	public static List<Integer> return_value()
+	{
+		return value;
+	}
+	public static String return_lowerbound()
+	{
+		return lowerBound;
+	}
+	public static String return_upperbound()
+	{
+		return upperBound;
+	}
+	public static int return_numberItem()
+	{
+		return number_of_item;
+	}
+	public static int return_capacity()
+	{
+		return capacity_limit;
+	}
+	public static double return_lowercost()
+	{
+		return lower_cost;
+	}
+	public static double return_uppercost()
+	{
+		return upper_cost;
+	}
+	public static double return_lowervalue()
+	{
+		return lower_value;
+	}
+	public static double return_uppervalue()
+	{
+		return upper_value;
+	}
+
+
 	public static void CSVparser()
 	{
-		String csvFile = new File("resources/k24.csv").getAbsolutePath();
+		String csvFile = new File("resources/k10.csv").getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		int count = 0;
@@ -158,9 +212,12 @@ public class Knapsack {
 				break;
 			}
 		}
+		/*
 		System.out.println("Highest value first: " + sent);
 		System.out.println("total cost: " + total_cost);
 		System.out.println("total value: " + total_value);
+		*/
+
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
@@ -218,14 +275,18 @@ public class Knapsack {
 			}
 			
 		}
+
+		/*
 		System.out.println("");
 		System.out.println("Lowest cost first: " + sent);
 		System.out.println("total cost: " + total_cost);
 		System.out.println("total value: " + total_value);
-		
+		*/
+
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
+
 		//System.out.println(a);
 		//System.out.println(b);
 		//System.out.println(c);
@@ -300,10 +361,12 @@ public class Knapsack {
 		System.out.println(d);
 		*/
 		
+		/*
 		System.out.println("");
 		System.out.println("Highest ratio: " + sent);
 		System.out.println("total cost: " + total_cost);
 		System.out.println("total value: " + total_value);
+		*/
 
 		full_name.add(sent);
 		full_cost.add(total_cost);
@@ -385,10 +448,12 @@ public class Knapsack {
 		System.out.println(d);
 		*/
 		
+		/*
 		System.out.println("");
 		System.out.println("Partial Knapsack: " + sent);
 		System.out.println("total cost: " + total_cost);
 		System.out.println("total value: " + total_value);
+		*/
 
 		full_name.add(sent);
 		full_cost.add(total_cost);
@@ -396,11 +461,6 @@ public class Knapsack {
 	}
 	public static void Knapsack_bound()
 	{
-		CSVparser();	
-		Highest_value();
-		Lowest_cost();
-		Highest_ratio();
-		Partial_knap();
 		List<String> a = new ArrayList<String>(full_name);
 		List<Double> b = new ArrayList<Double>(full_cost);
 		List<Double> c = new ArrayList<Double>(full_value);
@@ -471,13 +531,25 @@ public class Knapsack {
 
 		String lower_bound = "("+c.get(min_index)+", "+b.get(min_index)+", "+sort(name1)+")";
 		String upper_bound = "("+c.get(max_index)+", "+b.get(max_index)+", "+sort(name2)+")";
-		System.out.println();
-		System.out.println("Lower Bound: " + lower_bound);
-		System.out.println("Upper Bound: " + upper_bound);
+		lowerBound = lower_bound;
+		upperBound = upper_bound;
+		lower_cost = b.get(min_index);
+		lower_value = c.get(min_index);
+		upper_cost = b.get(max_index);
+		upper_value = c.get(max_index);
+
+		//System.out.println();
+		//System.out.println("Lower Bound: " + lower_bound);
+		//System.out.println("Upper Bound: " + upper_bound);
 	}
-	public static void main(String[] args)
+	public Knapsack()
 	{
+		CSVparser();	
+		Highest_value();
+		Lowest_cost();
+		Highest_ratio();
+		Partial_knap();
 		Knapsack_bound();
-		
 	}
+
 }
