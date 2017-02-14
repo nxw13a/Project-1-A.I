@@ -17,6 +17,8 @@ import java.util.*;
 
 public class Knapsack {
 
+	public static String file_name;
+
 	private static int capacity_limit;
 	private static int number_of_item;
 
@@ -34,6 +36,11 @@ public class Knapsack {
 	private static double upper_cost;
 	private static double lower_value;
 	private static double upper_value;
+
+	public static String return_filename()
+	{
+		return file_name;
+	}
 
 	public static List<String> return_name()
 	{
@@ -81,9 +88,10 @@ public class Knapsack {
 	}
 
 
-	public static void CSVparser()
+	private static void CSVparser()
 	{
-		String csvFile = new File("resources/k10.csv").getAbsolutePath();
+		file_name = "resources/k10.csv";
+		String csvFile = new File(file_name).getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		int count = 0;
@@ -147,7 +155,7 @@ public class Knapsack {
         }
 		//System.out.println("HI");
 	}
-	public static List<String> sort(List<String> list)
+	private static List<String> sort(List<String> list)
 	{
 		String temp;
 		for(int i = 1; i < list.size(); i++)
@@ -165,7 +173,7 @@ public class Knapsack {
 		}
 		return list;
 	}
-	public static void Highest_value()
+	private static void Highest_value()
 	{
 		double total_cost = 0;
 		double total_value = 0;
@@ -227,7 +235,7 @@ public class Knapsack {
 		//System.out.println(c);
 	}
 
-	public static void Lowest_cost()
+	private static void Lowest_cost()
 	{
 		double total_cost = 0;
 		double total_value = 0;
@@ -373,7 +381,7 @@ public class Knapsack {
 		full_value.add(total_value);
 	}
 
-	public static void Partial_knap()
+	private static void Partial_knap()
 	{
 		double total_cost = 0;
 		double total_value = 0;
@@ -459,7 +467,7 @@ public class Knapsack {
 		full_cost.add(total_cost);
 		full_value.add(total_value);
 	}
-	public static void Knapsack_bound()
+	private static void Knapsack_bound()
 	{
 		List<String> a = new ArrayList<String>(full_name);
 		List<Double> b = new ArrayList<Double>(full_cost);

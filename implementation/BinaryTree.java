@@ -25,15 +25,21 @@ public class BinaryTree{
     private static int num_item;
     private static int limit;
     private static String optimal_choice;
+    private static long static_time;
 
-    public static int maximum(int x)
+    public static String return_optimal()
+    {
+        return optimal_choice;
+    }
+
+    private static int maximum(int x)
     {
         if(x == 1)
             return 2;
         return (int)Math.pow(2,x) + maximum(x-1);
     }
 
-    public static int find_cost(String a)
+    private static int find_cost(String a)
     {
         int store = 0;
         List<String> name = new ArrayList<String>(library.return_name());
@@ -45,7 +51,7 @@ public class BinaryTree{
         List<Integer> cost = new ArrayList<Integer>(library.return_cost());
         return cost.get(store);
     }
-    public static int find_value(String b)
+    private static int find_value(String b)
     {
         int store = 0;
         List<String> name = new ArrayList<String>(library.return_name());
@@ -59,16 +65,17 @@ public class BinaryTree{
     }
     // (rightchild - 2) / 2 = parent
     // (leftchild - 1) / 2 = parent
-    /*
     public BinaryTree()
     {
+        library = new Knapsack();
         Build_Tree();
+        smart_search();
     }
-    */
 
-    public static void Build_Tree() {
+    private static void Build_Tree() {
 
             //temporary data
+            long startTime = System.currentTimeMillis();
             num_item = library.return_numberItem();
             limit = library.return_capacity();
 
@@ -97,7 +104,7 @@ public class BinaryTree{
                 }
             }
 
-            for(int x = 1;x < tree.size();x++)
+            for(int x = 1; x < tree.size(); x++)
             {
                 int t = x;
                 while((((2*t)+1) < tree.size()) && (((2*t)+2) < tree.size()) && (tree.get(t).access == false))
@@ -149,14 +156,16 @@ public class BinaryTree{
                 }
                 //System.out.println(x+" / "+tree.size());
             }
-            dumb_search();                              
+            long estimatedTime = System.currentTimeMillis() - startTime;
+            static_time = estimatedTime;
+            //System.out.println(estimatedTime + " millisecond");                           
     }
-    public static void dumb_search()
+    private static void smart_search()
     {
         List<Integer> optimal = new ArrayList<Integer>();
         List<Integer> optimal_cost = new ArrayList<Integer>();
         List<Integer> optimal_value = new ArrayList<Integer>();
-        for(int q = (tree.size() - (int)Math.pow(2,num_item)); q < tree.size();q++)
+        for(int q = (tree.size() - (int)Math.pow(2,num_item)); q < tree.size(); q++)
         {
             //System.out.println(tree.get(q).item+tree.get(q).choice+tree.get(q).depth+tree.get(q).path);
             int sum = 0;
@@ -175,7 +184,7 @@ public class BinaryTree{
             }
         }
         int temp = 0;
-        for(int x = 1; x < optimal.size();x++)
+        for(int x = 1; x < optimal.size(); x++)
         {
             if(optimal_value.get(x) > optimal_value.get(temp))
             {
@@ -191,18 +200,17 @@ public class BinaryTree{
             //System.out.println(tree.get(optimal.get(x)).path);
         } 
         optimal_choice = "Optimal: (" + (double)optimal_value.get(temp) + ", " + (double)optimal_cost.get(temp) + ", " + (tree.get(optimal.get(temp)).path)+")";
-        System.out.println(optimal_choice);
+        //System.out.println(optimal_choice);
         //System.out.println(temp + " " +tree.get(optimal.get(temp)).path);
         
     }
-    public static void main(String[] args)
+    public static String Smart_time()
     {
         long startTime = System.currentTimeMillis();
-        library = new Knapsack();
-        Build_Tree();
-        //System.out.println(library.return_name());
-        long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println("run in "+ estimatedTime +" millisecond");
+        smart_search();
+        long estimatedTime = System.currentTimeMillis() - startTime + static_time;
+        String temp = (estimatedTime*.001) + "s";
+        return temp;
     }
 }
 
