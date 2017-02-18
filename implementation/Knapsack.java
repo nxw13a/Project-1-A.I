@@ -90,7 +90,7 @@ public class Knapsack {
 
 	private static void CSVparser()
 	{
-		file_name = "k15.csv";
+		file_name = "k10.csv";
 		String csvFile = new File("resources/"+file_name).getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
