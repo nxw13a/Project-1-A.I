@@ -4,7 +4,7 @@ Proffessor: Dr. Pettit
 Languages: Java
 Artificial Intelligent
 
-note: this will work from 22 items or less. Since my laptop don't have alot of memory.
+note: this will work from 24 items or less. Since my laptop don't have alot of memory.
 */
 
 package implementation;
@@ -19,17 +19,22 @@ import java.util.*;
 
 
 public class Main{
+    private static Knapsack a;
+    private static BinaryTree b;
+
+    
 	
 	public static void main(String[] args)
     {
-    	Knapsack a = new Knapsack();
-        BinaryTree b = new BinaryTree();
+    
+        a = new Knapsack();
+        b = new BinaryTree();
         System.out.println(a.return_filename()); // file name
         System.out.println(a.return_capacity()); // capacity
         System.out.println(a.return_lowerbound()); // lower bound
         System.out.println(a.return_upperbound()); //upper bound
         System.out.println(b.return_optimal());   // optimal
-        System.out.println("????????????????");   //dumb search time -- still working on this
-        System.out.println(b.Smart_time() + "m"); //smart search time
+        System.out.println(b.dumb_time());   //dumb search time 
+        System.out.println(b.smart_time()); //smart search time --stillworking on this
     }
 }

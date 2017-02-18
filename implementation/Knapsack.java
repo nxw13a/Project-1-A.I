@@ -90,8 +90,8 @@ public class Knapsack {
 
 	private static void CSVparser()
 	{
-		file_name = "resources/k10.csv";
-		String csvFile = new File(file_name).getAbsolutePath();
+		file_name = "k15.csv";
+		String csvFile = new File("resources/"+file_name).getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
 		int count = 0;
@@ -300,7 +300,7 @@ public class Knapsack {
 		//System.out.println(c);
 	}
 
-	public static void Highest_ratio()
+	private static void Highest_ratio()
 	{
 		double total_cost = 0;
 		double total_value = 0;
