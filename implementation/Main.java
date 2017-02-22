@@ -36,6 +36,7 @@ public class Main{
                 out.println(b.dumb_time());
                 out.println(b.smart_time());
                 out.close();
+                System.out.println("Done"); 
         } 
         catch (FileNotFoundException e) {
                 e.printStackTrace();

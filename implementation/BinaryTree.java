@@ -158,6 +158,7 @@ public class BinaryTree{
 	        		tree.add(tree.get((x-1)/2) + "" + library.return_name().get(treeHeight-1));
 	        	}
 	        }
+	        //System.out.println(treeHeight);
     	}
         System.out.println("Tree complete");
 
@@ -165,22 +166,29 @@ public class BinaryTree{
         B_build_time = estimatedTime;
         dumb_search(tree);
         System.out.println("Dumb search complete");
+        /*
         for(int x = 0; x < tree.size(); x++)
         {
             if((above_limit(tree.get(x)) == false))
                 tree.set(x,""); 
+            //System.out.println(x + " | " + tree.size());
         }
+        System.out.println("Inserting complete");
+        */
+
+        List<String> tree_temp = new ArrayList<String>();
+
         for(int x = 0; x < tree.size(); x++)
         {
-            if(tree.get(x) == "")
+            if(tree.get(x) != "" && (above_limit(tree.get(x)) == true) )
             {
-                tree.remove(x);
-                x--;
+                tree_temp.add(tree.get(x));
             }
+            //System.out.println(x + " | " + tree.size());
         }
-        
-        smart_search(tree);
-        System.out.println("Smart search complete");                         
+   
+        smart_search(tree_temp);   
+        System.out.println("Smart search complete");                      
     }
     private static void dumb_search(List<String> tree)
     {
