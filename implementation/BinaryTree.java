@@ -143,77 +143,33 @@ public class BinaryTree{
         List<String> tree = new ArrayList<String>();
         int total = maximum(library.return_name().size());
         tree.add("");
-        int y = 1;
-        for(int x = 0; x < library.return_name().size(); x++)
-        {
-            while(y <= maximum(x+1))
-            {
-                if(y % 2 == 0)
-                    tree.add(library.return_name().get(x));
-                else
-                    tree.add("");
-                y++;
-            }
-        }
 
-        for(int x = 1; x < tree.size(); x++)
+        //int treeHeight = 1;
+        for(int treeHeight = 1; treeHeight <= library.return_numberItem(); treeHeight++)
         {
-            int t = x;
-            while((((2*t)+1) < tree.size()) && (((2*t)+2) < tree.size()))
-            {
-                if((t % 2 == 0) && (((2*t)+2) % 2 == 0))
-                {
-                    for(int p = 0; p < tree.get(t).length(); p++)
-                    {
-                        if(Ncontains(tree.get((2*t)+2), tree.get(t).charAt(p)) == true)
-                        {
-                            tree.set((2*t)+2, tree.get((2*t)+2) + Character.toString(tree.get(t).charAt(p)));
-                        }
-                    }
-                }
-                if((t % 2 == 0) && (((2*t)+1) % 2 != 0))
-                {
-                    for(int p = 0; p < tree.get(t).length(); p++)
-                    {
-                        if(Ncontains(tree.get((2*t)+1), tree.get(t).charAt(p)) == true)
-                        {
-                            tree.set((2*t)+1, tree.get((2*t)+1) + Character.toString(tree.get(t).charAt(p)));
-                        }
-                    }
-                }
-                if((t % 2 != 0) && (((2*t)+2) % 2 == 0))
-                {
-                    for(int p = 0; p < tree.get(t).length(); p++)
-                    {
-                        if(Ncontains(tree.get((2*t)+2), tree.get(t).charAt(p)) == true)
-                        {
-                            tree.set((2*t)+2, tree.get((2*t)+2) + Character.toString(tree.get(t).charAt(p)));
-                        }
-                    }
-                }
-                if((t % 2 != 0) && (((2*t)+1) % 2 != 0))
-                {
-                    for(int p = 0; p < tree.get(t).length(); p++)
-                    {
-                        if(Ncontains(tree.get((2*t)+1), tree.get(t).charAt(p)) == true)
-                        {
-                            tree.set((2*t)+1, tree.get((2*t)+1) + Character.toString(tree.get(t).charAt(p)));
-                        }
-                    }
-                }
-                t = (2*t) + 1;
-            }
-        }
-        //System.out.println(tree);
+	        for(int x = (int)Math.pow(2,treeHeight) -1; x <= (int)Math.pow(2,treeHeight+1)-2; x++)
+	        {
+	        	if(x % 2 == 1)
+	        	{
+	        		tree.add(tree.get((x-1)/2));
+	        	}
+	        	else
+	        	{
+	        		tree.add(tree.get((x-1)/2) + "" + library.return_name().get(treeHeight-1));
+	        	}
+	        }
+    	}
+        System.out.println("Tree complete");
+
         final long estimatedTime = System.currentTimeMillis() - startTime;
         B_build_time = estimatedTime;
         dumb_search(tree);
+        System.out.println("Dumb search complete");
         for(int x = 0; x < tree.size(); x++)
         {
             if((above_limit(tree.get(x)) == false))
                 tree.set(x,""); 
         }
-        //System.out.println(tree);
         for(int x = 0; x < tree.size(); x++)
         {
             if(tree.get(x) == "")
@@ -222,8 +178,9 @@ public class BinaryTree{
                 x--;
             }
         }
-        //System.out.println(tree);
-        smart_search(tree);                          
+        
+        smart_search(tree);
+        System.out.println("Smart search complete");                         
     }
     private static void dumb_search(List<String> tree)
     {
