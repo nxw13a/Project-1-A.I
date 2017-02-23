@@ -64,7 +64,7 @@ public class Knapsack {
 	}
 	public static int return_numberItem()
 	{
-		return number_of_item - 2;
+		return number_of_item;
 	}
 	public static int return_capacity()
 	{
