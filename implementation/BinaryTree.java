@@ -89,7 +89,7 @@ public class BinaryTree{
         {
             sum += (find_cost(""+a.charAt(x)));
         }
-        if(sum > library.return_capacity() || sum < library.return_lowercost())
+        if(sum >= library.return_capacity() || sum <= library.return_lowercost())
             return false;
         return true;
     }
@@ -242,7 +242,7 @@ public class BinaryTree{
                 
             }
 
-            if((sum <= limit)&&(tree.get(q).length() > 0)&&(sum >= library.return_lowercost())&&(sum_value >= library.return_lowervalue())) //add items that within the constraint
+            if((sum <= limit)&&(tree.get(q).length() > 0)) //add items that within the constraint
             {
                 optimal.add(q); //add items
                 optimal_cost.add(sum); //add cost
