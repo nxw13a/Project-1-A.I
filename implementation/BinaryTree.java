@@ -205,7 +205,8 @@ public class BinaryTree{
 
         smart_search(tree_temp);  //start smart search 
         System.out.println("Smart search complete");   //smart search complete
-        List<String> hold = new ArrayList<String>();
+        
+        List<String> hold = new ArrayList<String>(); //special optimization
         for(int x = 0; x < tree_temp.size(); x++)
         {
             if(special_optimization(tree_temp.get(x)) == true)
@@ -317,7 +318,6 @@ public class BinaryTree{
         final long estimatedTime = System.currentTimeMillis() + B_build_time - startTime; //final time of smart search
         String t = (estimatedTime*.001) + "s";
         SG_optimal_time = t;
-        System.out.println(SG_optimal_time);
     }
 
     public static String smart_time()
