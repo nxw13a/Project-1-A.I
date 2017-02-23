@@ -8,13 +8,8 @@ note: this will work from 24 items or less. Since my laptop don't have alot of m
 */
 
 package implementation;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+
+import java.io.*;
 import java.lang.*;
 import java.util.*;
 
@@ -23,6 +18,12 @@ import java.util.*;
 public class Main{
     private static Knapsack a;
     private static BinaryTree b;
+    private static String file;
+
+    public static String return_file()
+    {
+        return file;
+    }
 
     public static void Output_file()
     {
@@ -45,21 +46,12 @@ public class Main{
 
 	public static void main(String[] args)
     {
-    
+        Scanner user_input = new Scanner(System.in);
+        System.out.println("ENTER FILE NAME: ");
+        file = user_input.next();
+
         a = new Knapsack();
         b = new BinaryTree();
         Output_file();
-        /*
-        System.out.println(a.return_filename()); // file name
-        System.out.println(a.return_capacity()); // capacity
-        System.out.println(a.return_lowerbound()); // lower bound
-        System.out.println(a.return_upperbound()); //upper bound
-        System.out.println(b.return_optimal());   // optimal
-        System.out.println(b.dumb_time());   //dumb search time 
-        System.out.println(b.smart_time()); //smart search time
-        */
-
-   
-
     }
 }

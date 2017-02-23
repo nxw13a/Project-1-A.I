@@ -64,7 +64,7 @@ public class Knapsack {
 	}
 	public static int return_numberItem()
 	{
-		return number_of_item;
+		return number_of_item - 2;
 	}
 	public static int return_capacity()
 	{
@@ -90,7 +90,8 @@ public class Knapsack {
 
 	private static void CSVparser()
 	{
-		file_name = "k10.csv";
+		Main a = new Main();
+		file_name = a.return_file();
 		String csvFile = new File("resources/"+file_name).getAbsolutePath();
 		BufferedReader br = null;
 		String line = "";
@@ -104,11 +105,10 @@ public class Knapsack {
 		full_value = new ArrayList<Double>();
 		
 		try {
-
+			//csv parser
 			br = new BufferedReader(new FileReader(csvFile));
 			String text = br.readLine();
 			capacity_limit = Integer.parseInt(text);
-			//System.out.println(capacity_limit);
 
 			while((line = br.readLine()) != null) {
 				String hold = "";
@@ -133,11 +133,6 @@ public class Knapsack {
 			cost = new ArrayList<Integer>(list1);
 			value = new ArrayList<Integer>(list2);
 			number_of_item = count;
-			
-			//System.out.println(count);
-			//System.out.println(name);
-			//System.out.println(cost);
-			//System.out.println(value);
 		}
 		catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -151,12 +146,12 @@ public class Knapsack {
                     e.printStackTrace();
                 }
             }
-            //return list;
         }
-		//System.out.println("HI");
 	}
+
 	private static List<String> sort(List<String> list)
 	{
+		//sort the list String
 		String temp;
 		for(int i = 1; i < list.size(); i++)
 		{
@@ -173,8 +168,10 @@ public class Knapsack {
 		}
 		return list;
 	}
+
 	private static void Highest_value()
 	{
+		//intialization
 		double total_cost = 0;
 		double total_value = 0;
 		List<String> a = new ArrayList<String>(name);
@@ -185,7 +182,7 @@ public class Knapsack {
 		int temp;
 		int num;
 
-		for(int i = 1; i < number_of_item; i++)
+		for(int i = 1; i < number_of_item; i++) //sort items
 		{
 			for(int j = i ; j > 0; j--)
 			{
@@ -206,8 +203,9 @@ public class Knapsack {
 				
 			}
 		}
+
 		String sent = "";
-		for(int x = number_of_item - 1; x >= 0; x--)
+		for(int x = number_of_item - 1; x >= 0; x--) //calculate total value and cost
 		{
 			if((total_cost + b.get(x)) <= capacity_limit)
 			{
@@ -220,23 +218,16 @@ public class Knapsack {
 				break;
 			}
 		}
-		/*
-		System.out.println("Highest value first: " + sent);
-		System.out.println("total cost: " + total_cost);
-		System.out.println("total value: " + total_value);
-		*/
 
+		//stored calculations
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
-		
-		//System.out.println(a);
-		//System.out.println(b);
-		//System.out.println(c);
 	}
 
 	private static void Lowest_cost()
 	{
+		//initialization
 		double total_cost = 0;
 		double total_value = 0;
 		List<String> a = new ArrayList<String>(name);
@@ -247,7 +238,7 @@ public class Knapsack {
 		int temp;
 		int num;
 
-		for(int i = 1; i < number_of_item; i++)
+		for(int i = 1; i < number_of_item; i++) //sort the items
 		{
 			for(int j = i ; j > 0; j--)
 			{
@@ -269,7 +260,7 @@ public class Knapsack {
 			}
 		}
 		String sent = "";
-		for(int x = 0; x < number_of_item; x++)
+		for(int x = 0; x < number_of_item; x++) //calculate total cost and value
 		{
 			if((total_cost + c.get(x)) <= capacity_limit)
 			{
@@ -284,31 +275,23 @@ public class Knapsack {
 			
 		}
 
-		/*
-		System.out.println("");
-		System.out.println("Lowest cost first: " + sent);
-		System.out.println("total cost: " + total_cost);
-		System.out.println("total value: " + total_value);
-		*/
-
+		//stored calculations
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
-
-		//System.out.println(a);
-		//System.out.println(b);
-		//System.out.println(c);
 	}
 
 	private static void Highest_ratio()
 	{
+		//initialization
 		double total_cost = 0;
 		double total_value = 0;
 		List<String> a = new ArrayList<String>(name);
 		List<Integer> b = new ArrayList<Integer>(cost);
 		List<Integer> c = new ArrayList<Integer>(value);
 		List<Double> d = new ArrayList<Double>();
-		for(int x = 0; x < number_of_item; x++)
+
+		for(int x = 0; x < number_of_item; x++) //calculate ratio
 		{
 			double temp = value.get(x);
 			double temp1 = cost.get(x);
@@ -320,7 +303,7 @@ public class Knapsack {
 		int temp3;
 		double num;
 
-		for(int i = 1; i < number_of_item; i++)
+		for(int i = 1; i < number_of_item; i++) //sort the items
 		{
 			for(int j = i ; j > 0; j--)
 			{
@@ -347,7 +330,7 @@ public class Knapsack {
 		}
 
 		String sent = "";
-		for(int x = number_of_item - 1; x >= 0; x--)
+		for(int x = number_of_item - 1; x >= 0; x--) //calculating total  cost and value
 		{
 			if((total_cost + b.get(x)) <= capacity_limit)
 			{
@@ -361,21 +344,7 @@ public class Knapsack {
 			}
 		}
 
-		/*
-		System.out.println("");
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
-		System.out.println(d);
-		*/
-		
-		/*
-		System.out.println("");
-		System.out.println("Highest ratio: " + sent);
-		System.out.println("total cost: " + total_cost);
-		System.out.println("total value: " + total_value);
-		*/
-
+		//storing calculation
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
@@ -383,13 +352,15 @@ public class Knapsack {
 
 	private static void Partial_knap()
 	{
+		//initialization
 		double total_cost = 0;
 		double total_value = 0;
 		List<String> a = new ArrayList<String>(name);
 		List<Integer> b = new ArrayList<Integer>(cost);
 		List<Integer> c = new ArrayList<Integer>(value);
 		List<Double> d = new ArrayList<Double>();
-		for(int x = 0; x < number_of_item; x++)
+
+		for(int x = 0; x < number_of_item; x++) //calculation of ratio
 		{
 			double temp = value.get(x);
 			double temp1 = cost.get(x);
@@ -401,7 +372,7 @@ public class Knapsack {
 		int temp3;
 		double num;
 
-		for(int i = 1; i < number_of_item; i++)
+		for(int i = 1; i < number_of_item; i++) //sort the items
 		{
 			for(int j = i ; j > 0; j--)
 			{
@@ -429,7 +400,7 @@ public class Knapsack {
 
 		String sent = "";
 		int index = 0;
-		for(int x = number_of_item - 1; x >= 0; x--)
+		for(int x = number_of_item - 1; x >= 0; x--)//calculate value and cost
 		{
 			if((total_cost + b.get(x)) <= capacity_limit)
 			{
@@ -446,29 +417,16 @@ public class Knapsack {
 
 		double remain = capacity_limit - total_cost;
 		sent = sent + a.get(index);
-		total_value += c.get(index)*(remain/b.get(index));
-		total_cost = capacity_limit;
-		/*
-		System.out.println("");
-		System.out.println(a);
-		System.out.println(b);
-		System.out.println(c);
-		System.out.println(d);
-		*/
-		
-		/*
-		System.out.println("");
-		System.out.println("Partial Knapsack: " + sent);
-		System.out.println("total cost: " + total_cost);
-		System.out.println("total value: " + total_value);
-		*/
-
+		total_value += c.get(index)*(remain/b.get(index)); //get partial of the item that left over
+		total_cost = capacity_limit; //storing the item and calculation
 		full_name.add(sent);
 		full_cost.add(total_cost);
 		full_value.add(total_value);
 	}
-	private static void Knapsack_bound()
+
+	private static void Knapsack_bound() 
 	{
+		//knapsack comparison
 		List<String> a = new ArrayList<String>(full_name);
 		List<Double> b = new ArrayList<Double>(full_cost);
 		List<Double> c = new ArrayList<Double>(full_value);
@@ -477,7 +435,7 @@ public class Knapsack {
 		double temp;
 		double num;
 
-		for(int i = 1; i < 4; i++)
+		for(int i = 1; i < 4; i++) //sort the items
 		{
 			for(int j = i ; j > 0; j--)
 			{
@@ -498,11 +456,12 @@ public class Knapsack {
 				
 			}
 		}
-		int max_index = 3;
+
+		int max_index = 3; //3 solution to knapsack
 		double max = c.get(max_index);
 		for(int x = max_index - 1; x >=0; x--)
 		{
-			if((c.get(x) == max) && (b.get(x) < b.get(max_index)))
+			if((c.get(x) == max) && (b.get(x) < b.get(max_index))) //find the max bound
 			{
 				max = c.get(x);
 				max_index = x;
@@ -511,7 +470,7 @@ public class Knapsack {
 
 		int min_index = 0;
 		double min = c.get(min_index);
-		for(int x = min_index + 1; x < 4; x++)
+		for(int x = min_index + 1; x < 4; x++) //find the min bound
 		{
 			if((c.get(x) == min) && (b.get(x) < b.get(min_index)))
 			{
@@ -531,12 +490,12 @@ public class Knapsack {
 		String str2 = a.get(max_index);
 		String[] splited2 = str2.split("\\s+");
 		List<String> name2 = new ArrayList<String>();
-		for(int x = 0; x < splited2.length; x++)
+		for(int x = 0; x < splited2.length; x++) //split the string array
 		{
 			name2.add(splited2[x]);
 		}
 
-
+		//stored the min and max bound
 		String lower_bound = "("+c.get(min_index)+", "+b.get(min_index)+", "+sort(name1)+")";
 		String upper_bound = "("+c.get(max_index)+", "+b.get(max_index)+", "+sort(name2)+")";
 		lowerBound = lower_bound;
@@ -546,9 +505,6 @@ public class Knapsack {
 		upper_cost = b.get(max_index);
 		upper_value = c.get(max_index);
 
-		//System.out.println();
-		//System.out.println("Lower Bound: " + lower_bound);
-		//System.out.println("Upper Bound: " + upper_bound);
 	}
 	public Knapsack()
 	{
