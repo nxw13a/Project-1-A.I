@@ -37,7 +37,7 @@ public class Main{
                 out.println(b.dumb_time());
                 out.println(b.smart_time());
                 out.close();
-                System.out.println("Done"); 
+                System.out.println("Output complete"); 
         } 
         catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -50,6 +50,7 @@ public class Main{
         System.out.println("ENTER FILE NAME: ");
         file = user_input.next();
 
+        System.out.println();
         a = new Knapsack();
         b = new BinaryTree();
         Output_file();

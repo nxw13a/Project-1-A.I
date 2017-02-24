@@ -196,7 +196,7 @@ public class BinaryTree{
 
         for(int x = 0; x < tree.size(); x++)
         {
-            if(tree.get(x) != "" && (above_limit(tree.get(x)) == true) ) //cutting down tree or pruning the tree
+            if(tree.get(x) != "" && (above_limit(tree.get(x)) == true) && (special_optimization(tree.get(x)) == true)) //cutting down tree or pruning the tree
             {
                 tree_temp.add(tree.get(x)); //stored the items
             }
@@ -206,6 +206,7 @@ public class BinaryTree{
         smart_search(tree_temp);  //start smart search 
         System.out.println("Smart search complete");   //smart search complete
         
+        /*
         List<String> hold = new ArrayList<String>(); //special optimization
         for(int x = 0; x < tree_temp.size(); x++)
         {
@@ -217,6 +218,7 @@ public class BinaryTree{
 
         special_search(hold);
         System.out.println("Special search complete");
+        */
 
     }
 
