@@ -1,0 +1,8 @@
+This program run in java. So you need java compiler.
+
+1st: you need to open command prompt in the folder containing test.bat by shift clicking right
+2nd: you need to enter "test" and press enter.
+3rd: the program will ask you to enter the file name such as "k05.txt" but without quotation mark.
+Then press enter.
+
+The output file should be next to the test.bat

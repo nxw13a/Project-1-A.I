@@ -29,13 +29,13 @@ public class Main{
     {
         try {
                 PrintStream out = new PrintStream(new FileOutputStream("OutFile.txt"));
-                out.println(a.return_filename());
-                out.println(a.return_capacity());
-                out.println(a.return_lowerbound());
-                out.println(a.return_upperbound());
-                out.println(b.return_optimal());
-                out.println(b.dumb_time());
-                out.println(b.smart_time());
+                out.println("Filename: " + a.return_filename());
+                out.println("Capacity: " + a.return_capacity());
+                out.println("Lower_Bound: " + a.return_lowerbound());
+                out.println("Upper_Bound: " + a.return_upperbound());
+                out.println("Optimal: " + b.return_optimal());
+                out.println("Dumb search time: " + b.dumb_time());
+                out.println("Smart search time: " + b.smart_time());
                 out.close();
                 System.out.println("Output complete"); 
         } 
